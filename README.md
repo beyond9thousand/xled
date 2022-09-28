@@ -1,6 +1,6 @@
 # Description
 
-This utility will print the current state of `CAPS_LOCK` and `NUM_LOCK` respectively in json format (single item), however it was specifically written for monitoring the status over time.
+This utility will print the current state of `CAPS_LOCK` and `NUM_LOCK` respectively, however it was specifically written for monitoring the status over time.
 
 # Installation
 
