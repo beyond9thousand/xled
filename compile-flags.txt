@@ -1,0 +1,2 @@
+-I/usr/include/X11
+-lX11
