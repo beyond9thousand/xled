@@ -85,16 +85,22 @@ start_led_logger(Bool first_blood, Bool json) {
 /* Main {{{*/
 int
 main(int argc, char** argv) {
+    if (argc == 1) {
+        printf("No arguments given.\n");
+        printf(HELP_MESSAGE);
+        return EXIT_FAILURE;
+    }
+
     BEGIN_XOP
 
     int option;
-    while ((option = getopt(argc, argv, ":j::s::h")) != -1) {
+    while ((option = getopt(argc, argv, "-:j::s::h")) != -1) {
         switch (option) {
             case 's': start_led_logger(atoi(optarg ? optarg : "0"), False); break;
             case 'j': start_led_logger(atoi(optarg ? optarg : "0"), True); break;
             case 'h': fprintf(stdout, HELP_MESSAGE); break;
-            case '?': fprintf(stderr, HELP_MESSAGE); break;
-            default: perror("undefined"); break;
+            case '?': fprintf(stderr, "Invalid option.\n" HELP_MESSAGE); break;
+            default: fprintf(stderr, "Undefined value.\n" HELP_MESSAGE); break;
         }
     }
 
