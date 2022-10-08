@@ -34,6 +34,8 @@ xkb [-s|-s1|-s0|-j|-j[1|0]]
 
 Example usage of this app in my own [eww](https://github.com/elkowar/eww) bar setup can be found [here](https://github.com/beyond9thousand/dotfiles/blob/master/.config/eww/shell/lock_key.zsh)
 
+Example usage of this app in my own [eww](https://github.com/elkowar/eww) bar setup can be found [here](https://github.com/beyond9thousand/dotfiles/blob/master/.config/eww/shell/lock_key.zsh)
+
 # Credits
 
 Complete credit for the specivity of this project goes to [dharmx](https://github.com/dharmx)

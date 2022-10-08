@@ -13,6 +13,7 @@
     "OPTIONS:\n"                                                                                        \
     "    -s         indicators CAPS_LOCK_STATE NUM_LOCK_STATE\n"                                        \
     "    -j         {\"caps\":\"CAPS_LOCK_STATE\",\"num\":\"NUM_LOCK_STATE\"\n"                         \
+    "    -o         same as -j and -s but it prints only once\n"                                        \
     "\n"                                                                                                \
     "EXAMPLES:\n"                                                                                       \
     "    -s1        will print the initial value\n"                                                     \
