@@ -8,7 +8,7 @@
 #include <stdlib.h>
 
 #define HELP_MESSAGE                                                                                    \
-    "xkb -[s] ...\n"                                                                                    \
+    "xkb -[s|j|o] ...\n"                                                                                \
     "\n"                                                                                                \
     "OPTIONS:\n"                                                                                        \
     "    -s         indicators CAPS_LOCK_STATE NUM_LOCK_STATE\n"                                        \
@@ -18,6 +18,7 @@
     "    -s1        will print the initial value\n"                                                     \
     "    -s0        won't print the initial value / not providing any args will have the same effect\n" \
     "    -j[1|0]    same as -s\n"                                                                       \
+    "    -o[1|0]    query only once. 0 for normal and 1 for JSON\n"                                     \
     "\n"
 
 #define BEGIN_XOP    _setup();
@@ -66,12 +67,13 @@ display_ind_state(Bool ind_keys[2], int event_state, Bool json) {
 }
 
 void
-start_led_logger(Bool first_blood, Bool json) {
+start_led_logger(Bool first_blood, Bool json, Bool once) {
     Bool ind_keys[2] = {False, False};
-    if (first_blood) {
+    if (first_blood || once) {
         unsigned int start_state;
         XkbGetIndicatorState(display, XkbUseCoreKbd, &start_state);
         display_ind_state(ind_keys, start_state, json);
+        if (once) return;
     }
 
     XkbSelectEvents(display, XkbUseCoreKbd, XkbIndicatorStateNotifyMask, XkbIndicatorStateNotifyMask);
@@ -94,10 +96,11 @@ main(int argc, char** argv) {
     BEGIN_XOP
 
     int option;
-    while ((option = getopt(argc, argv, "-:j::s::h")) != -1) {
+    while ((option = getopt(argc, argv, "-:j::s::ho::")) != -1) {
         switch (option) {
-            case 's': start_led_logger(atoi(optarg ? optarg : "0"), False); break;
-            case 'j': start_led_logger(atoi(optarg ? optarg : "0"), True); break;
+            case 's': start_led_logger(atoi(optarg ? optarg : "0"), False, False); break;
+            case 'j': start_led_logger(atoi(optarg ? optarg : "0"), True, False); break;
+            case 'o': start_led_logger(True, atoi(optarg ? optarg : "0"), True); break;
             case 'h': fprintf(stdout, HELP_MESSAGE); break;
             case '?': fprintf(stderr, "Invalid option.\n" HELP_MESSAGE); break;
             default: fprintf(stderr, "Undefined value.\n" HELP_MESSAGE); break;

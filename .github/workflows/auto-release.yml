@@ -21,7 +21,7 @@ jobs:
       - name: Configure
         run: sudo apt-get update && sudo apt-get install libx11-dev libxi-dev libxkbcommon-dev
       - name: Build
-        run: cc -O3 --std=c11 -pedantic -Wall xkb.c -o xkb -lX11 -lXi
+        run: cc -O3 --std=c11 -pedantic -Wall xkb.c -o xkb -lX11 -lXi && chmod +x xkb
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
