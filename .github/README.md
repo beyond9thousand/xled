@@ -30,9 +30,7 @@ xkb [-s|-s1|-s0|-j|-j[1|0]]
 - `-s0` -- Won't print the initial value / not providing any args will have the same effect
 - `-j[1|0]` -- Same as `-s`
 - `-o[1|0]` -- print once `indicators CAPS_LOCK_STATE NUM_LOCK_STATE` if `-o0` or, `-o`
-               print once `{"caps":"CAPS_LOCK_STATE","num":"NUM_LOCK_STATE"}` if `-o1`
-
-Example usage of this app in my own [eww](https://github.com/elkowar/eww) bar setup can be found [here](https://github.com/beyond9thousand/dotfiles/blob/master/.config/eww/shell/lock_key.zsh)
+  print once `{"caps":"CAPS_LOCK_STATE","num":"NUM_LOCK_STATE"}` if `-o1`
 
 Example usage of this app in my own [eww](https://github.com/elkowar/eww) bar setup can be found [here](https://github.com/beyond9thousand/dotfiles/blob/master/.config/eww/shell/lock_key.zsh)
 
