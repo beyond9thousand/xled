@@ -68,14 +68,19 @@ display_ind_state(Bool ind_keys[2], int event_state, Bool json) {
 }
 
 void
-start_led_logger(Bool first_blood, Bool json, Bool once) {
+query_led_state(Bool json, Bool ind_keys[2]) {
+    unsigned int start_state;
+    XkbGetIndicatorState(display, XkbUseCoreKbd, &start_state);
+    if (ind_keys == NULL) {
+        Bool ind_keys_once[2] = {False, False};
+        display_ind_state(ind_keys_once, start_state, json);
+    } else display_ind_state(ind_keys, start_state, json);
+}
+
+void
+start_led_logger(Bool first_blood, Bool json) {
     Bool ind_keys[2] = {False, False};
-    if (first_blood || once) {
-        unsigned int start_state;
-        XkbGetIndicatorState(display, XkbUseCoreKbd, &start_state);
-        display_ind_state(ind_keys, start_state, json);
-        if (once) return;
-    }
+    if (first_blood) query_led_state(json, ind_keys);
 
     XkbSelectEvents(display, XkbUseCoreKbd, XkbIndicatorStateNotifyMask, XkbIndicatorStateNotifyMask);
     XkbIndicatorNotifyEvent event;
@@ -97,11 +102,11 @@ main(int argc, char** argv) {
     BEGIN_XOP
 
     int option;
-    while ((option = getopt(argc, argv, "-:j::s::ho::")) != -1) {
+    while ((option = getopt(argc, argv, "-:j::s::o::h")) != -1) {
         switch (option) {
-            case 's': start_led_logger(atoi(optarg ? optarg : "0"), False, False); break;
-            case 'j': start_led_logger(atoi(optarg ? optarg : "0"), True, False); break;
-            case 'o': start_led_logger(True, atoi(optarg ? optarg : "0"), True); break;
+            case 's': start_led_logger(atoi(optarg ? optarg : "0"), False); break;
+            case 'j': start_led_logger(atoi(optarg ? optarg : "0"), True); break;
+            case 'o': query_led_state(atoi(optarg ? optarg : "0"), NULL); break;
             case 'h': fprintf(stdout, HELP_MESSAGE); break;
             case '?': fprintf(stderr, "Invalid option.\n" HELP_MESSAGE); break;
             default: fprintf(stderr, "Undefined value.\n" HELP_MESSAGE); break;
