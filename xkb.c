@@ -86,7 +86,8 @@ start_led_logger(Bool first_blood, Bool json) {
     XkbIndicatorNotifyEvent event;
     while (True) {
         XNextEvent(display, (XEvent*) &event);
-        display_ind_state(ind_keys, event.state, json);
+        if (event.xkb_type == XkbIndicatorStateNotify)
+            display_ind_state(ind_keys, event.state, json);
     }
 }
 
