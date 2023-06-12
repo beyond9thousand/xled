@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    name: Build Xkb
+    name: Build xled
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -19,11 +19,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Configure
-        run: sudo apt-get update && sudo apt-get install libx11-dev libxi-dev libxkbcommon-dev
+        run: sudo apt-get update && sudo apt-get install libx11-dev
       - name: Build
-        run: cc -O3 --std=c11 -pedantic -Wall xkb.c -o xkb -lX11 -lXi && chmod +x xkb
+        run: make
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: xkb
+          files: xled

@@ -1,5 +1,3 @@
-/* compile command: cc -O3 --std=c11 -pedantic -Wall xkb.c -o xkb -lX11 -lXi */
-
 /* Headers and Defines {{{*/
 #include <X11/XKBlib.h>
 
@@ -8,7 +6,7 @@
 #include <stdlib.h>
 
 #define HELP_MESSAGE                                                                                    \
-    "xkb -[s|j|o] ...\n"                                                                                \
+    "xled -[s|j|o] ...\n"                                                                                \
     "\n"                                                                                                \
     "OPTIONS:\n"                                                                                        \
     "    -s         indicators CAPS_LOCK_STATE NUM_LOCK_STATE\n"                                        \
@@ -118,5 +116,3 @@ main(int argc, char** argv) {
     return EXIT_SUCCESS;
 }
 /*}}}*/
-
-// vim:filetype=c
