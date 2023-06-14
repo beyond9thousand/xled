@@ -6,7 +6,7 @@
 #include <stdlib.h>
 
 #define HELP_MESSAGE                                                                                    \
-    "xled -[s|j|o] ...\n"                                                                                \
+    "xled -[s|j|o] ...\n"                                                                               \
     "\n"                                                                                                \
     "OPTIONS:\n"                                                                                        \
     "    -s         indicators CAPS_LOCK_STATE NUM_LOCK_STATE\n"                                        \
